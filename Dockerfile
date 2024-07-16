@@ -1,13 +1,13 @@
-FROM node:16-alpine
+FROM python:3.9-slim
 
 WORKDIR /app
 
-ENV PORT=3000
+COPY . /app
 
-COPY ["package.json", "package-lock.json*", "./"]
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN npm install
+EXPOSE 80
 
-COPY . .
+ENV NAME World
 
-CMD ["npm", "start"]
+CMD ["python", "app.py"]
